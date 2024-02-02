@@ -1,0 +1,4 @@
+SELECT imie, nazwisko, opis, zdjecie FROM `osoby` WHERE Hobby_id in (1, 2, 6);
+SELECT `osoby`.id, `osoby`.nazwisko, `hobby`.`nazwa` FROM `osoby` INNER JOIN `hobby` ON `osoby`.`Hobby_id` = `hobby`.`id`;
+SELECT id, zdjecie FROM `osoby` WHERE imie = 'Monika' LIMIT 5;
+CREATE TABLE `wpisy` (`id` int UNSIGNED NOT NULL AUTO_INCREMENT, `wpis` varchar(20) DEFAULT NULL, `uzytkownik_id` int UNSIGNED NOT NULL, PRIMARY KEY (`id`));
