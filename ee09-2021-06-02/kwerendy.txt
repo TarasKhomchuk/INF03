@@ -1,0 +1,4 @@
+SELECT nazwa, ilosc, opis, cena, zdjecie FROM `produkty` WHERE Rodzaje_id in (1, 2);
+SELECT `produkty`.nazwa AS produkty, `producenci`.`nazwa` AS producenci FROM `produkty`, `producenci` WHERE `produkty`.`Producenci_id` = `producenci`.`id`;
+CREATE USER 'anna'@'localhost' IDENTIFIED BY '@anna23';
+INSERT INTO `produkty` (nazwa, ilosc, opis, cena, zdjecie, Producenci_id, Rodzaje_id) VALUES ('owoc1', 10, '', 9.99, 'owoce.jpg', (SELECT id FROM `producenci` WHERE nazwa='warzywa-rolnik'), (SELECT id FROM `rodzaje` WHERE nazwa='owoce'));
