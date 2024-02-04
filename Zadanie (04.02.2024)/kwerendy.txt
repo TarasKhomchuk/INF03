@@ -1,0 +1,70 @@
+0:
+DROP DATABASE IF EXISTS `dane1`;
+DROP DATABASE IF EXISTS `dane2`;
+DROP DATABASE IF EXISTS `dane3`;
+DROP DATABASE IF EXISTS `dane4`;
+CREATE DATABASE `dane1`;
+CREATE DATABASE `dane2`;
+CREATE DATABASE `dane3`;
+CREATE DATABASE `dane4`;
+
+USE `dane1`;
+
+1: 
+SELECT imie, nazwisko, opis, zdjecie FROM `osoby` WHERE `osoby`.`Hobby_id` IN (1, 2, 6);
+
+2:
+SELECT `osoby`.`id`, `osoby`.`nazwisko`, `hobby`.`nazwa` FROM `osoby`, `hobby` WHERE `osoby`.`Hobby_id` = `hobby`.`id` AND `osoby`.`rok_urodzenia`>2000;
+
+3:
+SELECT `osoby`.`id`, `osoby`.`zdjecie` FROM `osoby` WHERE `osoby`.`imie` = 'Monika' LIMIT 5;
+
+4:
+CREATE TABLE `wpisy` (`id` INT UNSIGNED AUTO_INCREMENT NOT NULL, `wpis` VARCHAR(20), `uzytkownik_id` INT UNSIGNED NOT NULL, PRIMARY KEY (`id`));
+
+USE `dane2`;
+
+5:
+SELECT `nazwa`, `ilosc`, `opis`, `cena`, `zdjecie` FROM `produkty` WHERE `Rodzaje_id` IN (1, 2);
+
+6:
+SELECT produkty.nazwa AS nazwa_product, producenci.nazwa AS nazwa_producent FROM produkty, producenci WHERE produkty.Producenci_id=producenci.id AND produkty.ilosc<10 AND produkty.Rodzaje_id=1;
+
+7:
+CREATE USER 'anna'@'localhost' IDENTIFIED BY '@nna23';
+
+8:
+INSERT INTO produkty (Rodzaje_id, Producenci_id, nazwa, ilosc, opis, cena, zdjecie)
+	SELECT rodzaje.id, producenci.id, data.* FROM
+		(SELECT 'owoc1' AS nazwa, 10 AS ilosc, '' AS opis, 9.99 AS cena, 'owoce.jpg' AS zdjecie) AS data,
+		(SELECT id FROM rodzaje WHERE nazwa='owoce') AS rodzaje,
+		(SELECT id FROM producenci WHERE nazwa='warzywa-rolnik') AS producenci;
+
+9:
+SELECT id, nazwa, opis, zdjecie FROM dane3.produkty WHERE id in (18, 22, 23, 25);
+
+10:
+SELECT id, nazwa, opis, zdjecie FROM dane3.produkty WHERE Rodzaje_id=12;
+
+11:
+SELECT dane3.produkty.nazwa AS nazwa_produkty, dane3.rodzaje.nazwa AS nazwa_rodzaje FROM dane3.produkty, dane3.rodzaje WHERE dane3.produkty.Rodzaje_id=dane3.rodzaje.id AND dane3.produkty.opis LIKE '%Leia%';
+
+12:
+DELETE FROM dane3.produkty WHERE id=15;
+
+13:
+SELECT id, imie, nazwisko, rok_urodzenia, zdjecie FROM dane4.osoby LIMIT 30;
+
+14:
+SELECT osoby.imie, osoby.nazwisko, osoby.rok_urodzenia, osoby.opis, osoby.zdjecie, hobby.nazwa FROM dane4.osoby AS osoby, dane4.hobby AS hobby WHERE osoby.Hobby_id=hobby.id AND osoby.id=10;
+
+15:
+SELECT AVG(rok_urodzenia) AS sredni, MIN(rok_urodzenia) AS najniższy, MAX(rok_urodzenia) AS najwyższy FROM dane4.osoby AS osoby;
+
+16:
+UPDATE 
+	dane4.osoby 
+SET 
+	opis=(SELECT nazwa FROM `hobby` WHERE id <= (SELECT CEIL(MAX(id)*RAND()) FROM dane4.hobby) ORDER BY id DESC LIMIT 1)
+WHERE 
+	dane4.osoby.Hobby_id=4;
