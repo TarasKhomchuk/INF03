@@ -1,0 +1,44 @@
+#baner{
+    color: white;
+    text-align: center;
+    height: 330px;
+}
+.druzyna{
+    color: white;
+    text-align: center;
+    width: 170px;
+    margin: 5px;
+    border: 1px solid white;
+    border-radius: 15px;
+    float: left;
+}
+.druzyna:hover{
+    background-color: white;
+    color: black;
+}
+#główny{
+    color: white;
+    clear: both;
+}
+#lewy{
+    background-color: WhiteSmoke;
+    width: 30%;
+    text-align: center;
+    height: 150px;
+    float: left;
+}
+#prawy{
+    background-color: WhiteSmoke;
+    width: 70%;
+    height: 150px;
+    float: left;
+}
+body{
+    background-color: SeaGreen;
+    font-family: Verdana;
+}
+h3{
+    text-align: center;
+    letter-spacing: 6px;
+    text-transform: capitalize;
+}
